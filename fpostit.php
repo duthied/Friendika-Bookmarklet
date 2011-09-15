@@ -71,13 +71,14 @@ if (isset($_POST['submit'])) {
 
 		$url = "http://" . $hostname . '/api/statuses/update';
 		$data = array('status' => $content);
+		
+		// echo "posting to: $url<br/>";
 
 		$c = curl_init();
 		curl_setopt($c, CURLOPT_URL, $url); 
 		curl_setopt($c, CURLOPT_USERPWD, "$username:$password");
 		curl_setopt($c, CURLOPT_POSTFIELDS, $data); 
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, true); 
-		curl_setopt($c, CURLOPT_FAILONERROR, true);
 		curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
 		$c_result = curl_exec($c); 
 		if(curl_errno($c)){ 
@@ -87,7 +88,7 @@ if (isset($_POST['submit'])) {
 		
 		curl_close($c);
 		if (!isset($error)) {
-			echo "<script>window.close();</script>";
+			echo '<script language="javascript" type="text/javascript">window.close();</script>';
 		}
 		
 	} else {
